@@ -91,7 +91,8 @@ module.exports = grammar({
       ),
     // NOTE: both boolean ,type, def and valuename
     // and fucntionname, is the base type
-    identifier: (_) => /[A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\u0100-\uFFFE$_][A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\u0100-\uFFFE\d_]*/,
+    identifier: (_) =>
+      /[A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\u0100-\uFFFE$_][A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\u0100-\uFFFE\d_]*/,
     escape_sequence: ($) =>
       token.immediate(
         seq(
