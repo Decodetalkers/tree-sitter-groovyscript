@@ -4,7 +4,7 @@ module.exports = grammar({
   extras: ($) => [$.line_comment, $.block_comment, /\s/],
   conflicts: ($) => [[$._unit, $.func]],
   rules: {
-    source_file: ($) => repeat($.command),
+    source_file: ($) => seq(optional($.shebang), repeat($.command)),
 
     block: ($) =>
       seq(
@@ -155,11 +155,10 @@ module.exports = grammar({
       );
     },
 
-    comment: ($) => choice($.line_comment, $.block_comment),
-
+    comment: ($) => choice($.line_comment, $.block_comment, $.shebang),
     line_comment: ($) => token(prec(0, seq("//", /[^\n]*/))),
-
     block_comment: ($) =>
       token(prec(0, seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"))),
+    shebang: ($) => seq("#!", /.*/),
   },
 });
