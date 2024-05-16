@@ -3,21 +3,48 @@
   "version": "0.1.0",
   "description": "A tree-sitter for groovy dsl",
   "main": "bindings/node",
+  "types": "bindings/node",
   "scripts": {
     "lint": "prettier --check grammar.js",
     "format": "prettier --write grammar.js",
     "build": "tree-sitter generate",
-    "test": "tree-sitter test"
+    "test": "tree-sitter test",
+    "install": "node-gyp-build",
+    "prebuildify": "prebuildify --napi --strip"
   },
   "keywords": [],
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**"
+  ],
   "author": "Decodetalkers",
   "gypfile": false,
   "license": "MIT",
   "dependencies": {
-    "nan": "^2.16.0"
+    "node-addon-api": "^7.1.0",
+    "node-gyp-build": "^4.8.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.21.0"
+  },
+  "peerDependenciesMeta": {
+    "tree_sitter": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "tree-sitter-cli": "^0.20.6",
-    "prettier": "^2.7.1"
-  }
+    "prettier": "^2.7.1",
+    "prebuildify": "^6.0.0"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.groovy",
+      "injection-regex": "^groovy$"
+    }
+  ]
 }
